@@ -1,0 +1,25 @@
+name: Build & Push to Azure ACR
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-and-push-acr:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      - name: Log in to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Build & push to ACR
+        run: |
+          az acr build \
+            --registry YOUR_ACR_NAME \
+            --image multi-cloud-cicd-app:latest \
+            .
