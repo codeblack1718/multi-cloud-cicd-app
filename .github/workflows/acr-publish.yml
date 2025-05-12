@@ -17,9 +17,13 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Build & push to ACR
+      - name: Log in to ACR
+        run: az acr login --name codeblack1718acr
+
+      - name: Build, tag, and push image
         run: |
-          az acr build \
-            --registry codeblack1718acr \
-            --image multi-cloud-cicd-app:latest \
-            .
+          IMAGE=multi-cloud-cicd-app
+          ACR_NAME=codeblack1718acr
+          docker build -t $IMAGE .
+          docker tag $IMAGE:latest $ACR_NAME.azurecr.io/$IMAGE:latest
+          docker push $ACR_NAME.azurecr.io/$IMAGE:latest
