@@ -20,6 +20,6 @@ jobs:
       - name: Build & push to ACR
         run: |
           az acr build \
-            --registry codeblack1718acr
+            --registry codeblack1718acr \
             --image multi-cloud-cicd-app:latest \
             .
