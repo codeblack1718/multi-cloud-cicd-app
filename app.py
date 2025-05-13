@@ -10,3 +10,4 @@ if __name__ == '__main__':
 
 # test: docker push to ACR
 # Trigger AWS GitHub Actions
+# trigger multi-cloud deploy
